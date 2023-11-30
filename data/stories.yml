@@ -1,0 +1,163 @@
+version: "3.1"
+
+stories:
+  - story: User greets and asks about fee refund policy
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_fee_refund
+      - action: utter_inquire_about_fee_refund_policy
+
+  - story: User inquires about medal, scholarship, or upgradation criteria
+    steps:
+      - intent: inquire_about_medal_scholarship_upgradation_criteria
+      - action: utter_explain_criteria
+
+  - story: User greets and then asks about medal criteria
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: inquire_about_medal_scholarship_upgradation_criteria
+      - action: utter_explain_criteria
+
+  - story: self study condition
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: confirm_self_study_conditions
+        entities:
+          - subject: ucs219
+          - study_mode: self
+          - upgradation_mode: summer
+      - slot_was_set:
+          - upgradation_mode: summer
+      - slot_was_set:
+          - subject: ucs219
+      - slot_was_set:
+          - study_mode: self
+      - action: self_study_eligibility_form
+      - active_loop: self_study_eligibility_form
+      - slot_was_set:
+          - subject: ucs219
+      - slot_was_set:
+          - upgradation_mode: summer
+      - slot_was_set:
+          - study_mode: self
+      - slot_was_set:
+          - requested_slot: current_grade
+      - intent: entered_grade
+        entities:
+          - grade: X
+      - slot_was_set:
+          - current_grade: X
+      - action: self_study_eligibility_form
+      - slot_was_set:
+          - current_grade: x
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_self_study_condition
+      - slot_was_set:
+          - current_grade: null
+      - slot_was_set:
+          - subject: null
+
+  - story: self study path1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: confirm_self_study_conditions
+        entities:
+          - subject: ucs016
+          - study_mode: self
+      - slot_was_set:
+          - subject: ucs016
+      - slot_was_set:
+          - study_mode: self
+      - action: self_study_eligibility_form
+      - active_loop: self_study_eligibility_form
+      - slot_was_set:
+          - subject: ucs016
+      - slot_was_set:
+          - study_mode: self
+      - slot_was_set:
+          - requested_slot: current_grade
+      - intent: entered_grade
+        entities:
+          - grade: E
+      - slot_was_set:
+          - current_grade: E
+      - action: self_study_eligibility_form
+      - slot_was_set:
+          - current_grade: e
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_self_study_condition
+      - slot_was_set:
+          - current_grade: null
+      - slot_was_set:
+          - subject: null
+
+  - story: self study path 2
+    steps:
+      - intent: confirm_self_study_conditions
+        entities:
+          - subject: uhu012
+          - study_mode: self
+          - grade: R.A
+      - slot_was_set:
+          - current_grade: R.A
+      - slot_was_set:
+          - subject: uhu012
+      - slot_was_set:
+          - study_mode: self
+      - action: self_study_eligibility_form
+      - active_loop: self_study_eligibility_form
+      - slot_was_set:
+          - subject: uhu012
+      - slot_was_set:
+          - current_grade: r.a
+      - slot_was_set:
+          - study_mode: self
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_self_study_condition
+      - slot_was_set:
+          - current_grade: null
+      - slot_was_set:
+          - subject: null
+  - story: grade upgrade path
+    steps:
+      - intent: inquire_about_grade_upgradation_eligibility
+        entities:
+          - grade: E
+      - slot_was_set:
+          - current_grade: E
+      - action: grade_eligibility_form
+      - active_loop: grade_eligibility_form
+      - slot_was_set:
+          - current_grade: e
+      - slot_was_set:
+          - upgradation_mode: summer
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_grade_upgrade_eligiblity
+
+
+  - story: exam process, registration,afirm
+    steps:
+      - intent: ask_exam_process
+        entities:
+          - upgradation_mode: summer
+      - slot_was_set:
+          - upgradation_mode: summer
+      - action: action_provide_exam_process
+      - intent: ask_about_registration
+      - action: action_handle_registration_inquiry
+      - intent: ask_about_timetable
+      - action: action_respond_to_timetable_inquiry
+      - intent: affirm
+      - action: utter_respond_affirm
