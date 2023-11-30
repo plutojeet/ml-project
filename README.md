@@ -1,4 +1,4 @@
-# botV1
+# Chatbot for Summer Sem Enquiries
 
 ### Brief description of project structure 
 
