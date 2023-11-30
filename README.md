@@ -1,5 +1,15 @@
 # botV1
 
+### Brief description of project structure 
+
+1. data folder contains the data set <br>
+data/nlu.yml -> dataset<br>
+data/rules.yml and data/stories.yml -> rules defined for output of model
+2. result folder contains testing results
+3. bot.py is the frontend of the project built in streamlit
+4. config.yml contains the defination of the machine learning pipeline
+5. domain.yml -> configuration file that outlines the AI assistant's capabilities, defining its language understanding, actions, and responses.
+
 
 # to run 
 - Python v3.8
